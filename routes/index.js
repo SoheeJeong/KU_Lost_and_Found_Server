@@ -7,9 +7,11 @@ var User = require('../models/user');
 // });
 
 
-router.post('/', function(req, res, next) {
-	console.log(req.body);
-	var personInfo = req.body;
+router.post('/join', function(req, res, next) {
+    const id = req.body.id;
+    const pw = req.body.pw;
+    console.log(id,pw);
+	// var personInfo = req.body;
 
 
 	if(!personInfo.email || !personInfo.username || !personInfo.password || !personInfo.passwordConf){
