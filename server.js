@@ -31,24 +31,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-//locathost3000/join
+//locathost4000/join
 const join = require('./routes/join'); //여기서 index.js 쓰임
 app.use('/join', join);
 
+//localhost4000/lost_upload
+const lost_upload = require('./routes/lost_upload'); //여기서 index.js 쓰임
+app.use('/lost_upload', lost_upload);
 
-// app.get('/',(req,res) => {
-//     res.send('on home');
-// });
 
-// // error handler
-// // define as the last app.use callback
-// app.use(function (err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.send(err.message);
-// });
+// error handler
+// define as the last app.use callback
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.send(err.message);
+});
 
 //mongodb connect
-mongoose.connect('mongodb://localhost/join');
+mongoose.connect('mongodb://localhost/board');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -59,8 +59,3 @@ db.once('open', function () {
 app.listen(4000, () => {
   console.log('Express app listening on port 4000');
 });
-
-
-// app.listen(8080, function() {
-//     console.log("listen umm..umm..um...");
-//   });
