@@ -36,9 +36,8 @@ const lost_upload = require('./routes/lost_upload');
 app.use('/lost_upload', lost_upload);
 
 //localhost4000/board_lost
-//const board_lost = require('./routes/board_lost'); 
-//app.use('/board_lost', board_lost);
-
+const find_upload = require('./routes/find_upload'); 
+app.use('/find_upload', find_upload);
 
 // error handler
 // define as the last app.use callback
