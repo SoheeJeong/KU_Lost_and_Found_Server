@@ -7,8 +7,8 @@ router.post('/', async (req,res) => {
         let find_upload = new FindPost({
             title: req.body.title,
             name: req.body.name,
-            getplace: req.body.place,
-            putplace: req.body.place,
+            getplace: req.body.getplace,
+            putplace: req.body.putplace,
             content: req.body.content,
             replynum: req.body.replynum,
             username: req.body.username
@@ -16,8 +16,8 @@ router.post('/', async (req,res) => {
         await find_upload.save();
         res.json({message: "작성 완료!"});
     } catch (err) {
-        res.json({message: err});
-    }    
+            res.json({message: err});
+        }    
 });
 
 
