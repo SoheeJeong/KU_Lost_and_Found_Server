@@ -1,18 +1,19 @@
 var express = require('express');
 var router = express.Router();
-const LostPost = require('../models/lostpost');
+const FindPost = require('../models/findpost');
 
 router.post('/', async (req,res) => {
     try{
-        let lost_upload = new LostPost({
+        let find_upload = new FindPost({
             title: req.body.title,
             name: req.body.name,
-            place: req.body.place,
+            getplace: req.body.place,
+            putplace: req.body.place,
             content: req.body.content,
             replynum: req.body.replynum,
             username: req.body.username
         });
-        await lost_upload.save();
+        await find_upload.save();
         res.json({message: "작성 완료!"});
     } catch (err) {
         res.json({message: err});

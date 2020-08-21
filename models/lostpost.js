@@ -1,30 +1,30 @@
+//분실물 관련 schema
 const mongoose = require('mongoose');
-const { Int32 } = require('bson');
 const Schema = mongoose.Schema;
 
 LostSchema = new Schema( {
-    title: {
+    title: { //제목
         type: String,
         required: true },
-    name: {
+    name: { //분실물명
         type: String,
         required: true },
-    place: {
+    place: { //분실장소
         type: String,
         required: true },
-    replynum: {
+    replynum: { //댓글수
         type: Number,
         default: 0 },
-    content: {
+    content: { //내용
         type: String,
         default: "nocontent" },
-    username: {
+    username: { //작성자
         type: String,
         default: "nonamed"} ,
-    date: {
+    date: { //날짜
         type: Date,
         default: Date.now }
 }),
 
-LostUpload = mongoose.model('LostUpload', LostSchema);
-module.exports = LostUpload;
+LostPost = mongoose.model('LostPost', LostSchema);
+module.exports = LostPost;

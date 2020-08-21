@@ -31,13 +31,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-//locathost4000/join
-const join = require('./routes/join'); //여기서 index.js 쓰임
-app.use('/join', join);
-
 //localhost4000/lost_upload
-const lost_upload = require('./routes/lost_upload'); //여기서 index.js 쓰임
+const lost_upload = require('./routes/lost_upload'); 
 app.use('/lost_upload', lost_upload);
+
+//localhost4000/board_lost
+//const board_lost = require('./routes/board_lost'); 
+//app.use('/board_lost', board_lost);
 
 
 // error handler

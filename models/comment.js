@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-PostSchema = new Schema( {
-    title: {
+CommentSchema = new Schema( {
+    username: { //작성자
         type: String,
         required: true
     },
-    description: {
+    content: { //내용
         type: String,
         required: true
     },
-    date: {
+    date: { //날짜
         type: Date,
         default: Date.now
     }
 }),
 
-Post = mongoose.model('Post', PostSchema);
-module.exports = Post;
+CommentPost = mongoose.model('CommentPost', CommentSchema);
+module.exports = CommentPost;
