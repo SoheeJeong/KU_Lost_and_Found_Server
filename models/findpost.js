@@ -11,16 +11,15 @@ FindSchema = new Schema( {
         required: true },
     getplace: { //습득장소
         type: String,
-        required: true },
+        },
     putplace: { //보관장소
-        type: String,
-        required: true },
+        type: String, 
+        },
     replynum: { //댓글수
         type: Number,
         default: 0 },
     content: { //내용
-        type: String,
-        default: "nocontent" },
+        type: String },
     username: { //작성자
         type: String,
         default: "nonamed"} ,

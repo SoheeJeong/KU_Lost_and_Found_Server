@@ -35,9 +35,13 @@ app.use(express.urlencoded({ extended: true }));
 const lost_upload = require('./routes/lost_upload'); 
 app.use('/lost_upload', lost_upload);
 
-//localhost4000/board_lost
+//localhost4000/find_upload
 const find_upload = require('./routes/find_upload'); 
 app.use('/find_upload', find_upload);
+
+//localhost4000/board_lost
+const board_lost = require('./routes/board_lost'); 
+app.use('/board_lost', board_lost);
 
 // error handler
 // define as the last app.use callback
@@ -46,7 +50,7 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
-//mongodb connect
+//mongodb connect (db name = board)
 mongoose.connect('mongodb://localhost/board');
 
 const db = mongoose.connection;
