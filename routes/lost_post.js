@@ -3,17 +3,26 @@
 var express = require('express');
 var router = express.Router();
 const LostPost = require('../models/lostpost');
-const { ObjectID } = require('bson');
 
-router.get("/", async (req, res) => {
+//게시글 보기(완)
+router.get("/:_id", async (req, res) => {
     try {
-    //밑에 id값은 예시
-      var id = ObjectID("5f3e9f259de32774d0bf3d38");
-      const lostpost = await LostPost.findOne({_id: id});
-      res.json(lostpost)
+        var id = req.params._id;
+        const lostpost = await LostPost.findOne({"_id":id});
+        res.json(lostpost);
     } catch (err) {
       res.json({ message: err });
     }
   });
+
+//게시글 삭제 (미완)
+//아직 프론트에 삭제버튼 & 삭제기능 추가 안함 //작성자, 관리자만 삭제 가능하게 하기
+router.delete("/:_id", async (req, res) =>{ 
+    try{
+        item.remove({"_id" :req.params.id});
+    } catch (err) {
+      res.json({ message: err });
+    }
+});
 
 module.exports = router;
