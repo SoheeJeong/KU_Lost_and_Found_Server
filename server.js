@@ -43,6 +43,18 @@ app.use('/find_upload', find_upload);
 const board_lost = require('./routes/board_lost'); 
 app.use('/board_lost', board_lost);
 
+//localhost4000/board_find
+const board_find = require('./routes/board_find'); 
+app.use('/board_find', board_find);
+
+//localhost4000/find_post
+const find_post = require('./routes/find_post'); 
+app.use('/find_post', find_post);
+
+//localhost4000/lost_post
+const lost_post = require('./routes/lost_post'); 
+app.use('/lost_post', lost_post);
+
 // error handler
 // define as the last app.use callback
 app.use(function (err, req, res, next) {
