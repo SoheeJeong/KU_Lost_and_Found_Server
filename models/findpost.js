@@ -1,5 +1,6 @@
 //습득물 관련 schema
 const mongoose = require('mongoose');
+const { ObjectID } = require('bson');
 const Schema = mongoose.Schema;
 
 FindSchema = new Schema( {
@@ -19,13 +20,14 @@ FindSchema = new Schema( {
         type: Number,
         default: 0 },
     content: { //내용
-        type: String },
+        type: String,
+        default: "임시 내용"},
     username: { //작성자
         type: String,
         default: "nonamed"} ,
     date: { //날짜
         type: Date,
-        default: Date.now }
+        default: Date.now}
 }),
 
 FindPost = mongoose.model('FindPost', FindSchema);

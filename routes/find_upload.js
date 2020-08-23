@@ -11,7 +11,7 @@ router.post('/', async (req,res) => {
             putplace: req.body.putplace,
             content: req.body.content,
             replynum: req.body.replynum,
-            username: req.body.username
+            username: req.body.username,
         });
         await find_upload.save();
         res.json({message: "작성 완료!"});
