@@ -1,16 +1,15 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 app.use(bodyParser.json());
 const cors = require("cors");
 
-
 const corsOptions = {
   origin: true,
-  credentials: true
+  credentials: true,
 };
 
 app.use(
@@ -20,8 +19,8 @@ app.use(
     secret: "findthanku",
     cookie: {
       httpOnly: true,
-      secure: false
-    }
+      secure: false,
+    },
   })
 );
 
@@ -30,30 +29,41 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 //localhost4000/lost_upload
-const lost_upload = require('./routes/lost_upload'); 
-app.use('/lost_upload', lost_upload);
+const lost_upload = require("./routes/lost_upload");
+app.use("/lost_upload", lost_upload);
 
 //localhost4000/find_upload
-const find_upload = require('./routes/find_upload'); 
-app.use('/find_upload', find_upload);
+const find_upload = require("./routes/find_upload");
+app.use("/find_upload", find_upload);
+
+//localhost4000/notice_upload
+const notice_upload = require("./routes/notice_upload");
+app.use("/notice_upload", notice_upload);
 
 //localhost4000/board_lost
-const board_lost = require('./routes/board_lost'); 
-app.use('/board_lost', board_lost);
+const board_lost = require("./routes/board_lost");
+app.use("/board_lost", board_lost);
 
 //localhost4000/board_find
-const board_find = require('./routes/board_find'); 
-app.use('/board_find', board_find);
+const board_find = require("./routes/board_find");
+app.use("/board_find", board_find);
+
+//localhost4000/notice
+const board_notice = require("./routes/board_notice");
+app.use("/notice", board_notice);
 
 //localhost4000/find_post
-const find_post = require('./routes/find_post'); 
-app.use('/find_post', find_post);
+const find_post = require("./routes/find_post");
+app.use("/find_post", find_post);
 
 //localhost4000/lost_post
-const lost_post = require('./routes/lost_post'); 
-app.use('/lost_post', lost_post);
+const lost_post = require("./routes/lost_post");
+app.use("/lost_post", lost_post);
+
+//localhost4000/notice_post
+const notice_post = require("./routes/notice_post");
+app.use("/notice_post", notice_post);
 
 // error handler
 // define as the last app.use callback
@@ -63,14 +73,13 @@ app.use(function (err, req, res, next) {
 });
 
 //mongodb connect (db name = board)
-mongoose.connect('mongodb://localhost/board');
+mongoose.connect("mongodb://localhost/board");
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-});
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {});
 
 // listen on port 4000
 app.listen(4000, () => {
-  console.log('Express app listening on port 4000');
+  console.log("Express app listening on port 4000");
 });
