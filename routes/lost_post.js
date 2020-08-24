@@ -1,8 +1,8 @@
 //분실물 게시판의 게시물 제목 클릭 시 상세 게시글을 보여줌
-
 var express = require('express');
 var router = express.Router();
 const LostPost = require('../models/lostpost');
+const Comments = require("../models/comment");
 
 //게시글 보기(완)
 router.get("/:_id", async (req, res) => {
@@ -20,6 +20,32 @@ router.get("/:_id", async (req, res) => {
 router.delete("/:_id", async (req, res) =>{ 
     try{
         item.remove({"_id" :req.params.id});
+    } catch (err) {
+      res.json({ message: err });
+    }
+});
+
+//댓글 저장
+router.post('/:_id'+"/comment", async (req,res) => {
+    try{
+        let comments = new Comments({
+            username: req.body.username,
+            content: req.body.content,
+            postid: req.body.postid
+        });
+        await comments.save();
+        res.json({message: "저장완료"});
+    } catch (err) {
+        res.json({message: err});
+    }    
+});
+
+//댓글 열람
+router.get("/:_id"+"/comment", async (req, res) => {
+    try {
+      var id = req.params._id;
+      const comments = await Comments.find({"postid": id });
+      res.json(comments);
     } catch (err) {
       res.json({ message: err });
     }
