@@ -81,4 +81,16 @@ router.delete("/post/:_id" + "/comment/:_commentid", async (req, res) =>{
     }
 });
 
+//댓글 수정
+router.patch("/post/:_id" + "/comment/:_commentid"+"/content/:content", async (req, res) =>{ 
+    await Comments.updateOne({_id: req.params._commentid },{$set:{content : req.params.content}})
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((err) => {
+        console.error(err);
+        next(err);
+    });
+});
+
 module.exports = router;
