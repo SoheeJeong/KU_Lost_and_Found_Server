@@ -29,41 +29,17 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//localhost4000/lost_upload
-const lost_upload = require("./routes/lost_upload");
-app.use("/lost_upload", lost_upload);
+//localhost4000/lost
+const lost = require("./routes/lost");
+app.use("/lost", lost);
 
-//localhost4000/find_upload
-const find_upload = require("./routes/find_upload");
-app.use("/find_upload", find_upload);
-
-//localhost4000/notice_upload
-const notice_upload = require("./routes/notice_upload");
-app.use("/notice_upload", notice_upload);
-
-//localhost4000/board_lost
-const board_lost = require("./routes/board_lost");
-app.use("/board_lost", board_lost);
-
-//localhost4000/board_find
-const board_find = require("./routes/board_find");
-app.use("/board_find", board_find);
+//localhost4000/find
+const find = require("./routes/find");
+app.use("/find", find);
 
 //localhost4000/notice
-const board_notice = require("./routes/board_notice");
-app.use("/notice", board_notice);
-
-//localhost4000/find_post
-const find_post = require("./routes/find_post");
-app.use("/find_post", find_post);
-
-//localhost4000/lost_post
-const lost_post = require("./routes/lost_post");
-app.use("/lost_post", lost_post);
-
-//localhost4000/notice_post
-const notice_post = require("./routes/notice_post");
-app.use("/notice_post", notice_post);
+const notice = require("./routes/notice");
+app.use("/notice", notice);
 
 // error handler
 // define as the last app.use callback
