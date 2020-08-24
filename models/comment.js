@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
+const { ObjectID } = require('bson');
 const Schema = mongoose.Schema;
 
 CommentSchema = new Schema( {
-    username: { //작성자
+    postid: { //어떤 게시글의 댓글인지 게시글의 _id정보
         type: String,
         required: true
+    },
+    username: { //작성자
+        type: String,
+        default: "sohee(temp)"
     },
     content: { //내용
         type: String,
