@@ -44,11 +44,12 @@ router.get("/post/:_id", async (req, res) => {
     }
   });
 
-//게시글 삭제 (미완)
-//아직 프론트에 삭제버튼 & 삭제기능 추가 안함 //작성자, 관리자만 삭제 가능하게 하기
+//게시글 삭제 (미완) //작성자, 관리자만 삭제 가능하게 하기
 router.delete("/post/:_id", async (req, res) =>{ 
     try{
-        item.remove({"_id" :req.params.id});
+        await LostPost.findOneAndRemove({"_id":req.params._id}) //게시글 삭제
+        await Comments.remove({"postid":req.params._id},{"postkind":"lost"})//관련 댓글 모두 삭제
+        res.json({message:'deleted'});
     } catch (err) {
       res.json({ message: err });
     }
@@ -60,7 +61,8 @@ router.post('/post/:_id'+"/comment", async (req,res) => {
         let comments = new Comments({
             username: req.body.username,
             content: req.body.content,
-            postid: req.body.postid
+            postid: req.body.postid,
+            postkind: req.body.postkind,
         });
         await comments.save();
         res.json({message: "저장완료"});
