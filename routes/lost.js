@@ -4,8 +4,37 @@ var router = express.Router();
 const LostPost = require('../models/lostpost');
 const Comments = require("../models/comment");
 
-//게시글 보기(완)
-router.get("/:_id", async (req, res) => {
+//게시글 작성
+router.post('/upload', async (req,res) => {
+    try{
+        let lost_upload = new LostPost({
+            title: req.body.title,
+            name: req.body.name,
+            place: req.body.place,
+            content: req.body.content,
+            replynum: req.body.replynum,
+            username: req.body.username
+        });
+        await lost_upload.save();
+        res.json({message: "작성 완료!"});
+    } catch (err) {
+        res.json({message: err});
+    }    
+});
+
+//전체 게시글 보기
+router.get("/board", async (req, res) => {
+    try {
+      const boardlost = await LostPost.find();
+      //시간순정렬 추가하기
+      res.json(boardlost)
+    } catch (err) {
+      res.json({ message: err });
+    }
+});
+
+//상세 게시글 보기
+router.get("/post/:_id", async (req, res) => {
     try {
         var id = req.params._id;
         const lostpost = await LostPost.findOne({"_id":id});
@@ -17,7 +46,7 @@ router.get("/:_id", async (req, res) => {
 
 //게시글 삭제 (미완)
 //아직 프론트에 삭제버튼 & 삭제기능 추가 안함 //작성자, 관리자만 삭제 가능하게 하기
-router.delete("/:_id", async (req, res) =>{ 
+router.delete("/post/:_id", async (req, res) =>{ 
     try{
         item.remove({"_id" :req.params.id});
     } catch (err) {
@@ -26,7 +55,7 @@ router.delete("/:_id", async (req, res) =>{
 });
 
 //댓글 저장
-router.post('/:_id'+"/comment", async (req,res) => {
+router.post('/post/:_id'+"/comment", async (req,res) => {
     try{
         let comments = new Comments({
             username: req.body.username,
@@ -41,11 +70,21 @@ router.post('/:_id'+"/comment", async (req,res) => {
 });
 
 //댓글 열람
-router.get("/:_id"+"/comment", async (req, res) => {
+router.get("/post/:_id"+"/comment", async (req, res) => {
     try {
       var id = req.params._id;
       const comments = await Comments.find({"postid": id });
       res.json(comments);
+    } catch (err) {
+      res.json({ message: err });
+    }
+});
+
+//댓글 삭제
+router.delete("/post/:_id" + "/comment/:_commentid", async (req, res) =>{ 
+    try{
+        await Comments.findOneAndRemove({"_id":req.params._commentid})
+        res.json({message:'deleted'});
     } catch (err) {
       res.json({ message: err });
     }
