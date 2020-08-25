@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
   content: {
     //내용
     type: String,
-    default: "임시 내용",
+    required: true,
   },
   date: {
     //날짜
