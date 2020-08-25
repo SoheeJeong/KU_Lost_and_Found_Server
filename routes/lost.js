@@ -43,7 +43,6 @@ router.get("/post/:_id", async (req, res) => {
       res.json({ message: err });
     }
   });
-
 //게시글 삭제 (미완) //작성자, 관리자만 삭제 가능하게 하기
 router.delete("/post/:_id", async (req, res) =>{ 
     try{
@@ -54,7 +53,17 @@ router.delete("/post/:_id", async (req, res) =>{
       res.json({ message: err });
     }
 });
-
+//게시글 수정
+router.patch("/post/:_id" + "/content/:content", async (req, res) =>{ 
+    await LostPost.updateOne({_id: req.params._id },{$set:{content : req.params.content}})
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((err) => {
+        console.error(err);
+        next(err);
+    });
+});
 //댓글 저장
 router.post('/post/:_id'+"/comment", async (req,res) => {
     try{
@@ -70,7 +79,6 @@ router.post('/post/:_id'+"/comment", async (req,res) => {
         res.json({message: err});
     }    
 });
-
 //댓글수 조정(+1,-1)
 router.patch("/post/:_id" + "/replynum/:_num", async (req, res) =>{ 
     posts = await LostPost.findOne({_id:req.params._id});
@@ -85,7 +93,6 @@ router.patch("/post/:_id" + "/replynum/:_num", async (req, res) =>{
         next(err);
     });
 });
-
 //댓글 열람
 router.get("/post/:_id"+"/comment", async (req, res) => {
     try {

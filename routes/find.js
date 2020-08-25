@@ -55,7 +55,17 @@ router.delete("/post/:_id", async (req, res) =>{
       res.json({ message: err });
     }
 });
-
+//게시글 수정
+router.patch("/post/:_id" + "/content/:content", async (req, res) =>{ 
+    await FindPost.updateOne({_id: req.params._id },{$set:{content : req.params.content}})
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((err) => {
+        console.error(err);
+        next(err);
+    });
+});
 //댓글 저장
 router.post('/post/:_id'+"/comment", async (req,res) => {
     try{
