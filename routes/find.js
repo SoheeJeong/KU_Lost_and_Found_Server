@@ -71,7 +71,20 @@ router.post('/post/:_id'+"/comment", async (req,res) => {
         res.json({message: err});
     }    
 });
-
+//댓글수 조정(+1,-1)
+router.patch("/post/:_id" + "/replynum/:_num", async (req, res) =>{ 
+    posts = await FindPost.findOne({_id:req.params._id});
+    const newreplynum = Number(posts.replynum) + Number(req.params._num);
+    if(newreplynum<0){ newreplynum=0; }
+    await FindPost.updateOne({_id: req.params._id },{$set:{replynum : newreplynum}})
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((err) => {
+        console.error(err);
+        next(err);
+    });
+});
 //댓글 열람
 router.get("/post/:_id"+"/comment", async (req, res) => {
     try {
