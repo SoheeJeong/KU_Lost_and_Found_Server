@@ -1,6 +1,5 @@
 //습득물 관련 schema
 const mongoose = require('mongoose');
-const { ObjectID } = require('bson');
 const Schema = mongoose.Schema;
 
 FindSchema = new Schema( {
@@ -11,17 +10,14 @@ FindSchema = new Schema( {
         type: String,
         required: true },
     getplace: { //습득장소
-        type: String,
-        },
+        type: String, },
     putplace: { //보관장소
-        type: String, 
-        },
+        type: String, },
     replynum: { //댓글수
         type: Number,
         default: 0 },
     content: { //내용
-        type: String,
-        default: "임시 내용"},
+        type: String,},
     username: { //작성자
         type: String,
         default: "nonamed"} ,

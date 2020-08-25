@@ -7,6 +7,10 @@ CommentSchema = new Schema( {
         type: String,
         required: true
     },
+    postkind: { //분실 or 습득 (게시글종류)
+        type: String,
+        required: true
+    },
     username: { //작성자
         type: String,
         default: "sohee(temp)"
