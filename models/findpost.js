@@ -17,7 +17,7 @@ FindSchema = new Schema( {
         type: Number,
         default: 0 },
     content: { //내용
-        type: String,},
+        type: String, },
     username: { //작성자
         type: String,
         default: "nonamed"} ,
