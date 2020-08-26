@@ -13,7 +13,8 @@ router.post('/upload', async (req,res) => {
             place: req.body.place,
             content: req.body.content,
             replynum: req.body.replynum,
-            username: req.body.username
+            username: req.body.username,
+            googleId: req.body.googleId,
         });
         await lost_upload.save();
         res.json({message: "작성 완료!"});
@@ -21,7 +22,6 @@ router.post('/upload', async (req,res) => {
         res.json({message: err});
     }    
 });
-
 //전체 게시글 보기
 router.get("/board", async (req, res) => {
     try {
@@ -32,7 +32,6 @@ router.get("/board", async (req, res) => {
       res.json({ message: err });
     }
 });
-
 //상세 게시글 보기
 router.get("/post/:_id", async (req, res) => {
     try {
@@ -72,6 +71,7 @@ router.post('/post/:_id'+"/comment", async (req,res) => {
             content: req.body.content,
             postid: req.body.postid,
             postkind: req.body.postkind,
+            googleId: req.body.googleId,
         });
         await comments.save();
         res.json({message: "저장완료"});

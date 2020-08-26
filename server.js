@@ -41,8 +41,13 @@ app.use("/find", find);
 const notice = require("./routes/notice");
 app.use("/notice", notice);
 
+//user
 const user = require("./routes/user");
 app.use("/user",user);
+
+// //mypage
+// const mypage = require("./routes/mypage");
+// app.use("/mypage",mypage);
 
 // error handler
 // define as the last app.use callback

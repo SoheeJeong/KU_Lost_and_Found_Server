@@ -19,6 +19,9 @@ LostSchema = new Schema( {
     username: { //작성자
         type: String,
         default: "nonamed"} ,
+    googleId: { //작성자 아이디
+        type: String,
+        required: true} ,
     date: { //날짜
         type: Date,
         default: Date.now }

@@ -13,6 +13,10 @@ const Schema = mongoose.Schema;
     type: String,
     required: true,
   },
+  googleId: { //작성자 아이디
+    type: String,
+    required: true,
+  },
   date: {
     //날짜
     type: Date,
