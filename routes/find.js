@@ -56,8 +56,16 @@ router.delete("/post/:_id", async (req, res) =>{
     }
 });
 //게시글 수정
-router.patch("/post/:_id" + "/content/:content", async (req, res) =>{ 
-    await FindPost.updateOne({_id: req.params._id },{$set:{content : req.params.content}})
+router.patch("/post/:_id" + "/edit"+"/:title"+"/:name"+"/:getplace"+"/:putplace"+"/:content", async (req, res) =>{ 
+   // const defaultpost = await FindPost.findOne({_id: req.params._id});
+    const title = decodeURI(req.params.title);  if(title=='') title = defaultpost.title;
+    const name = decodeURI(req.params.name);  if(name=='') name = defaultpost.name;
+    const getplace = decodeURI(req.params.getplace);  if(getplace=='') getplace = defaultpost.getplace;
+    const putplace = decodeURI(req.params.putplace);  if(putplace=='') putplace = defaultpost.putplace;
+    const content = decodeURI(req.params.content);  if(content=='') content = defaultpost.content;
+
+    await FindPost.updateOne({_id: req.params._id },{$set:{title:title, 
+      name:name, getplace:getplace,putplace:putplace,content:content}})
     .then((result) => {
         res.json(result);
     })
@@ -66,6 +74,7 @@ router.patch("/post/:_id" + "/content/:content", async (req, res) =>{
         next(err);
     });
 });
+
 //댓글 저장
 router.post('/post/:_id'+"/comment", async (req,res) => {
     try{
