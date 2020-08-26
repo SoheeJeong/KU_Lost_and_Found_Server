@@ -9,6 +9,7 @@ router.post("/upload", async (req, res) => {
       let notice_upload = new Notice({
         title: req.body.title,
         content: req.body.content,
+        googleId: req.body.googleId,
       });
       await notice_upload.save();
       res.json({ message: "작성 완료!" });

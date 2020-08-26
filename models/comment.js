@@ -15,6 +15,10 @@ CommentSchema = new Schema( {
         type: String,
         default: "sohee(temp)"
     },
+    googleId: { //작성자 아이디(숫자형)
+        type: String,
+        required: true
+    } ,
     content: { //내용
         type: String,
         required: true

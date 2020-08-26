@@ -15,6 +15,7 @@ router.post("/upload", async (req, res) => {
       content: req.body.content,
       replynum: req.body.replynum,
       username: req.body.username,
+      googleId: req.body.googleId,
     });
     await find_upload.save();
     res.json({ message: "작성 완료!" });
@@ -58,11 +59,11 @@ router.delete("/post/:_id", async (req, res) =>{
 //게시글 수정
 router.patch("/post/:_id" + "/edit"+"/:title"+"/:name"+"/:getplace"+"/:putplace"+"/:content", async (req, res) =>{ 
    // const defaultpost = await FindPost.findOne({_id: req.params._id});
-    const title = decodeURI(req.params.title);  if(title=='') title = defaultpost.title;
-    const name = decodeURI(req.params.name);  if(name=='') name = defaultpost.name;
-    const getplace = decodeURI(req.params.getplace);  if(getplace=='') getplace = defaultpost.getplace;
-    const putplace = decodeURI(req.params.putplace);  if(putplace=='') putplace = defaultpost.putplace;
-    const content = decodeURI(req.params.content);  if(content=='') content = defaultpost.content;
+    const title = decodeURI(req.params.title); // if(title=='') title = defaultpost.title;
+    const name = decodeURI(req.params.name); // if(name=='') name = defaultpost.name;
+    const getplace = decodeURI(req.params.getplace); // if(getplace=='') getplace = defaultpost.getplace;
+    const putplace = decodeURI(req.params.putplace); // if(putplace=='') putplace = defaultpost.putplace;
+    const content = decodeURI(req.params.content);  //if(content=='') content = defaultpost.content;
 
     await FindPost.updateOne({_id: req.params._id },{$set:{title:title, 
       name:name, getplace:getplace,putplace:putplace,content:content}})
@@ -83,6 +84,7 @@ router.post('/post/:_id'+"/comment", async (req,res) => {
             content: req.body.content,
             postid: req.body.postid,
             postkind: req.body.postkind,
+            googleId: req.body.googleId,
         });
         await comments.save();
         res.json({message: "저장완료"});
