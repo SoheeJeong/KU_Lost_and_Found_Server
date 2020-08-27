@@ -58,12 +58,11 @@ router.delete("/post/:_id", async (req, res) =>{
 });
 //게시글 수정
 router.patch("/post/:_id" + "/edit"+"/:title"+"/:name"+"/:getplace"+"/:putplace"+"/:content", async (req, res) =>{ 
-   // const defaultpost = await FindPost.findOne({_id: req.params._id});
-    const title = decodeURI(req.params.title); // if(title=='') title = defaultpost.title;
-    const name = decodeURI(req.params.name); // if(name=='') name = defaultpost.name;
-    const getplace = decodeURI(req.params.getplace); // if(getplace=='') getplace = defaultpost.getplace;
-    const putplace = decodeURI(req.params.putplace); // if(putplace=='') putplace = defaultpost.putplace;
-    const content = decodeURI(req.params.content);  //if(content=='') content = defaultpost.content;
+    const title = (req.params.title); // if(title=='') title = defaultpost.title;
+    const name = (req.params.name); // if(name=='') name = defaultpost.name;
+    const getplace = (req.params.getplace); // if(getplace=='') getplace = defaultpost.getplace;
+    const putplace = (req.params.putplace); // if(putplace=='') putplace = defaultpost.putplace;
+    const content = (req.params.content);  //if(content=='') content = defaultpost.content;
 
     await FindPost.updateOne({_id: req.params._id },{$set:{title:title, 
       name:name, getplace:getplace,putplace:putplace,content:content}})

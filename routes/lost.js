@@ -53,8 +53,14 @@ router.delete("/post/:_id", async (req, res) =>{
     }
 });
 //게시글 수정
-router.patch("/post/:_id" + "/content/:content", async (req, res) =>{ 
-    await LostPost.updateOne({_id: req.params._id },{$set:{content : req.params.content}})
+router.patch("/post/:_id" + "/edit"+"/:title"+"/:name"+"/:place"+"/:content", async (req, res) =>{ 
+    const title = (req.params.title); // if(title=='') title = defaultpost.title;
+    const name = (req.params.name); // if(name=='') name = defaultpost.name;
+    const place = (req.params.place); // if(getplace=='') getplace = defaultpost.getplace;
+    const content = (req.params.content);  //if(content=='') content = defaultpost.content;
+
+    await LostPost.updateOne({_id: req.params._id },{$set:{title:title, 
+      name:name, place:place,content:content}})
     .then((result) => {
         res.json(result);
     })

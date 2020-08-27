@@ -5,12 +5,20 @@ const LostPost = require('../models/lostpost');
 const FindPost = require("../models/findpost");
 
 //mypage
-router.get("/mypage/:temp", async (req, res) => {
+router.get("/:boardkind"+"/:googleId", async (req, res) => {
     try {
-      const mylost = await LostPost.find();
-      const myfind = await FindPost.find()
-      //시간순정렬 추가하기
-      res.json(boardnotice);
+      var boardkind = req.params.boardkind;
+      if(boardkind === "lost"){
+        const mylost = await LostPost.find({googleId: req.params.googleId});
+        res.json(mylost);
+      }
+      else if(boardkind === "find"){
+        const myfind = await FindPost.find({googleId: req.params.googleId});
+        res.json(myfind);
+      }
+      else{
+        res.json({message: "wrong board type"});
+      }
     } catch (err) {
       res.json({ message: err });
     }

@@ -10,12 +10,14 @@ LostSchema = new Schema( {
         type: String,
         required: true },
     place: { //분실장소
-        type: String },
+        type: String,
+        required: true },
     replynum: { //댓글수
         type: Number,
         default: 0 },
     content: { //내용
-        type: String },
+        type: String, 
+        required: true},
     username: { //작성자
         type: String,
         default: "nonamed"} ,
