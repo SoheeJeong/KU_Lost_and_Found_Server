@@ -17,7 +17,6 @@ router.post("/upload", async (req, res) => {
       res.json({ message: err });
     }
 });
-
 //전체 게시글 열람
 router.get("/", async (req, res) => {
   try {
@@ -60,4 +59,18 @@ router.patch("/post/:_id" + "/content/:content", async (req, res) =>{
         next(err);
     });
 });
+//게시글 검색
+router.get("/search/:searchval", async (req, res) => {
+  try{
+    let options = [
+      { title: new RegExp(req.params.searchval) },
+      { content: new RegExp(req.params.searchval) },
+    ]
+    const posts = await Notice.find({ $or: options })
+    res.json(posts);
+  } catch(err){
+    res.json({message: err});
+  }
+});
+
 module.exports = router;
