@@ -60,7 +60,7 @@ router.patch("/post/:_id" + "/edit"+"/:title"+"/:name"+"/:place"+"/:content", as
     const content = (req.params.content);  //if(content=='') content = defaultpost.content;
 
     await LostPost.updateOne({_id: req.params._id },{$set:{title:title, 
-      name:name, place:place,content:content}})
+      name:name, place:place}}) //,content:content
     .then((result) => {
         res.json(result);
     })
@@ -69,6 +69,21 @@ router.patch("/post/:_id" + "/edit"+"/:title"+"/:name"+"/:place"+"/:content", as
         next(err);
     });
 });
+//게시글 검색
+router.get("/board/search/:searchval", async (req, res) => {
+    try{
+      let options = [
+        { title: new RegExp(req.params.searchval) },
+        { name: new RegExp(req.params.searchval) },
+        { place: new RegExp(req.params.searchval) },
+        { content: new RegExp(req.params.searchval) },
+      ]
+      const posts = await LostPost.find({ $or: options })
+      res.json(posts);
+    } catch(err){
+      res.json({message: err});
+    }
+  });
 //댓글 저장
 router.post('/post/:_id'+"/comment", async (req,res) => {
     try{
