@@ -26,9 +26,5 @@
   "bugs": {
     "url": "https://github.com/SoheeJeong/KU_Lost_and_Found_Server/issues"
   },
-  "homepage": "https://github.com/SoheeJeong/KU_Lost_and_Found_Server#readme",
-  "engines": {
-    "node": "v12.16.2",
-    "npm": "6.14.4"
-  }
+  "homepage": "https://github.com/SoheeJeong/KU_Lost_and_Found_Server#readme"
 }
