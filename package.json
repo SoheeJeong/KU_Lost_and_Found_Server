@@ -1,0 +1,30 @@
+{
+  "name": "ku_lost_and_found_server",
+  "version": "1.0.0",
+  "description": "고려대학교 구성원을 위한 '스마트 분실물센터'의 서버(backend)",
+  "main": "server.js",
+  "dependencies": {
+    "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express-session": "^1.17.1",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoheeJeong/KU_Lost_and_Found_Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoheeJeong/KU_Lost_and_Found_Server/issues"
+  },
+  "homepage": "https://github.com/SoheeJeong/KU_Lost_and_Found_Server#readme"
+}
