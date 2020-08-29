@@ -58,7 +58,10 @@ app.use(function (err, req, res, next) {
 });
 
 //mongodb connect (db name = board)
-mongoose.connect("mongodb://localhost/board");
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/board");
+mongoose.connect(
+  "mongodb://eunsoo:eunsoo0802@ds061691.mlab.com:61691/heroku_86l029dh"
+);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
