@@ -6,6 +6,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 app.use(bodyParser.json());
 const cors = require("cors");
+const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
   origin: true,
@@ -47,7 +48,7 @@ app.use("/notice", notice);
 
 //mypage
 const mypage = require("./routes/mypage");
-app.use("/mypage",mypage);
+app.use("/mypage", mypage);
 
 // error handler
 // define as the last app.use callback
@@ -64,6 +65,6 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {});
 
 // listen on port 4000
-app.listen(4000, () => {
+app.listen(PORT, () => {
   console.log("Express app listening on port 4000");
 });
