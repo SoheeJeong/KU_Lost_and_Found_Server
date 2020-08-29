@@ -6,7 +6,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 app.use(bodyParser.json());
 const cors = require("cors");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
   origin: true,
