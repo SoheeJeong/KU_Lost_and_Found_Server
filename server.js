@@ -42,10 +42,6 @@ app.use("/find", find);
 const notice = require("./routes/notice");
 app.use("/notice", notice);
 
-// //user
-// const user = require("./routes/user");
-// app.use("/user",user);
-
 //mypage
 const mypage = require("./routes/mypage");
 app.use("/mypage", mypage);
@@ -66,5 +62,5 @@ db.once("open", function () {});
 
 // listen on port 4000
 app.listen(PORT, () => {
-  console.log("Express app listening on port 4000");
+  console.log("Express app listening on port");
 });

@@ -6,22 +6,19 @@ const Schema = mongoose.Schema;
   title: {
     //제목
     type: String,
-    required: true,
-  },
+    required: true},
   content: {
     //내용
     type: String,
-    required: true,
-  },
+    required: true},
   googleId: { //작성자 아이디
     type: String,
-    required: true,
-  },
+    required: true},
   date: {
     //날짜
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now},
 })),
-  (Notice = mongoose.model("Notice", NoticeSchema));
+
+Notice = mongoose.model("Notice", NoticeSchema);
 module.exports = Notice;

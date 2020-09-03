@@ -21,7 +21,6 @@ router.post("/upload", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const boardnotice = await Notice.find();
-    //시간순정렬 추가하기
     res.json(boardnotice);
   } catch (err) {
     res.json({ message: err });
@@ -39,7 +38,7 @@ router.get("/post/:_id", async (req, res) => {
     }
   });
   
-//게시글 삭제 (미완) //관리자만 삭제 가능하게 하기
+//게시글 삭제
 router.delete("/post/:_id", async (req, res) =>{ 
     try{
         await Notice.findOneAndRemove({"_id":req.params._id}) //게시글 삭제
