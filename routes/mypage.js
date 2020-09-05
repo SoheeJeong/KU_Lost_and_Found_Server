@@ -8,10 +8,12 @@ const FindPost = require("../models/findpost");
 router.get("/:boardkind"+"/:googleId", async (req, res) => {
     try {
       var boardkind = req.params.boardkind;
+      //분실물 게시글
       if(boardkind === "lost"){
         const mylost = await LostPost.find({googleId: req.params.googleId});
         res.json(mylost);
       }
+      //습득물 게시글
       else if(boardkind === "find"){
         const myfind = await FindPost.find({googleId: req.params.googleId});
         res.json(myfind);
