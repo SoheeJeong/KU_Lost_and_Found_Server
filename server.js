@@ -30,19 +30,19 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//localhost4000/lost
+//분실물 관련
 const lost = require("./routes/lost");
 app.use("/lost", lost);
 
-//localhost4000/find
+//습득물 관련
 const find = require("./routes/find");
 app.use("/find", find);
 
-//localhost4000/notice
+//공지사항 관련
 const notice = require("./routes/notice");
 app.use("/notice", notice);
 
-//mypage
+//mypage 관련
 const mypage = require("./routes/mypage");
 app.use("/mypage", mypage);
 
@@ -53,14 +53,14 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
-//mongodb connect (db name = board)
+//mongodb connect (db name = 'board')
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/board");
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {});
 
-// listen on port 4000
+// listen on port
 app.listen(PORT, () => {
   console.log("Express app listening on port");
 });

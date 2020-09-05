@@ -26,7 +26,6 @@ router.get("/", async (req, res) => {
     res.json({ message: err });
   }
 });
-
 //상세 게시글 열람
 router.get("/post/:_id", async (req, res) => {
     try {
@@ -41,7 +40,8 @@ router.get("/post/:_id", async (req, res) => {
 //게시글 삭제
 router.delete("/post/:_id", async (req, res) =>{ 
     try{
-        await Notice.findOneAndRemove({"_id":req.params._id}) //게시글 삭제
+       //게시글 삭제
+        await Notice.findOneAndRemove({"_id":req.params._id}) 
         res.json({message:'deleted'});
     } catch (err) {
       res.json({ message: err });

@@ -3,21 +3,22 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 (NoticeSchema = new Schema({
-  title: {
-    //제목
+  title: { //제목
     type: String,
-    required: true},
-  content: {
-    //내용
+    required: true
+  },
+  content: { //내용
     type: String,
-    required: true},
+    required: true
+  },
   googleId: { //작성자 아이디
     type: String,
-    required: true},
-  date: {
-    //날짜
+    required: true
+  },
+  date: { //날짜
     type: Date,
-    default: Date.now},
+    default: Date.now
+  },
 })),
 
 Notice = mongoose.model("Notice", NoticeSchema);

@@ -62,8 +62,10 @@ router.get("/post/:_id", async (req, res) => {
 //게시글 삭제
 router.delete("/post/:_id", async (req, res) =>{ 
     try{
-        await FindPost.findOneAndRemove({"_id":req.params._id}) //게시글 삭제
-        await Comments.remove({"postid":req.params._id},{"postkind":"find"})//관련 댓글 모두 삭제
+        //게시글 삭제
+        await FindPost.findOneAndRemove({"_id":req.params._id}) 
+        //관련 댓글 모두 삭제
+        await Comments.remove({"postid":req.params._id},{"postkind":"find"})
         res.json({message:'deleted'});
     } catch (err) {
       res.json({ message: err });
@@ -127,7 +129,6 @@ router.get("/post/:_id"+"/comment", async (req, res) => {
       res.json({ message: err });
     }
 });
-
 //댓글 삭제
 router.delete("/post/:_id" + "/comment/:_commentid", async (req, res) =>{ 
     try{
@@ -137,7 +138,6 @@ router.delete("/post/:_id" + "/comment/:_commentid", async (req, res) =>{
       res.json({ message: err });
     }
 });
-
 //댓글 수정
 router.patch("/post/:_id" + "/comment/:_commentid"+"/content/:content", async (req, res) =>{ 
     Comments.updateOne({_id: req.params._commentid },{$set:{content : req.params.content}})
