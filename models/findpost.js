@@ -5,31 +5,40 @@ const Schema = mongoose.Schema;
 FindSchema = new Schema( {
     title: { //제목
         type: String,
-        required: true },
+        required: true 
+    },
     name: { //습득물명
         type: String,
-        required: true },
+        required: true 
+    },
     getplace: { //습득장소
         type: String, 
-        required: true},
+        required: true
+    },
     putplace: { //보관장소
         type: String, 
-        required: true},
+        required: true
+    },
     replynum: { //댓글수
         type: Number,
-        default: 0 },
+        default: 0 
+    },
     content: { //내용
         type: String, 
-        required: true},
+        required: true
+    },
     username: { //작성자
         type: String,
-        default: "nonamed"} ,
+        default: "nonamed"
+    } ,
     googleId: { //작성자 아이디
         type: String,
-        required: true} ,
+        required: true
+    } ,
     date: { //날짜
         type: Date,
-        default: Date.now}
+        default: Date.now
+    }
 }),
 
 FindPost = mongoose.model('FindPost', FindSchema);

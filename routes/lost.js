@@ -26,7 +26,6 @@ router.post('/upload', async (req,res) => {
 router.get("/board", async (req, res) => {
     try {
       const boardlost = await LostPost.find();
-      //시간순정렬 추가하기
       res.json(boardlost)
     } catch (err) {
       res.json({ message: err });
@@ -42,11 +41,13 @@ router.get("/post/:_id", async (req, res) => {
       res.json({ message: err });
     }
   });
-//게시글 삭제 (미완) //작성자, 관리자만 삭제 가능하게 하기
+//게시글 삭제
 router.delete("/post/:_id", async (req, res) =>{ 
     try{
-        await LostPost.findOneAndRemove({"_id":req.params._id}) //게시글 삭제
-        await Comments.remove({"postid":req.params._id},{"postkind":"lost"})//관련 댓글 모두 삭제
+        //게시글 삭제
+        await LostPost.findOneAndRemove({"_id":req.params._id})
+        //관련 댓글 모두 삭제
+        await Comments.remove({"postid":req.params._id},{"postkind":"lost"})
         res.json({message:'deleted'});
     } catch (err) {
       res.json({ message: err });
@@ -54,13 +55,13 @@ router.delete("/post/:_id", async (req, res) =>{
 });
 //게시글 수정
 router.patch("/post/:_id" + "/edit"+"/:title"+"/:name"+"/:place"+"/:content", async (req, res) =>{ 
-    const title = (req.params.title); // if(title=='') title = defaultpost.title;
-    const name = (req.params.name); // if(name=='') name = defaultpost.name;
-    const place = (req.params.place); // if(getplace=='') getplace = defaultpost.getplace;
-    const content = (req.params.content);  //if(content=='') content = defaultpost.content;
+    const title = (req.params.title); 
+    const name = (req.params.name); 
+    const place = (req.params.place); 
+    const content = (req.params.content);  
 
     await LostPost.updateOne({_id: req.params._id },{$set:{title:title, 
-      name:name, place:place}}) //,content:content
+      name:name, place:place,content:content}}) 
     .then((result) => {
         res.json(result);
     })
@@ -124,7 +125,6 @@ router.get("/post/:_id"+"/comment", async (req, res) => {
       res.json({ message: err });
     }
 });
-
 //댓글 삭제
 router.delete("/post/:_id" + "/comment/:_commentid", async (req, res) =>{ 
     try{
@@ -134,7 +134,6 @@ router.delete("/post/:_id" + "/comment/:_commentid", async (req, res) =>{
       res.json({ message: err });
     }
 });
-
 //댓글 수정
 router.patch("/post/:_id" + "/comment/:_commentid"+"/content/:content", async (req, res) =>{ 
     await Comments.updateOne({_id: req.params._commentid },{$set:{content : req.params.content}})
